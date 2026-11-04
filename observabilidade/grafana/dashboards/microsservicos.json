@@ -73,7 +73,7 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "histogram_quantile(0.95, sum by (job, le) (rate(http_request_duration_seconds_bucket{job=~\"$job\"}[5m])))",
+          "expr": "histogram_quantile(0.95, sum by (job, le) (rate(http_request_duration_highr_seconds_bucket{job=~\"$job\"}[5m])))",
           "legendFormat": "{{job}}"
         }
       ],
