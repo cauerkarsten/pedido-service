@@ -1,7 +1,7 @@
 # Ambiente local: pedido-service + Postgres.
 # O estoque-service roda no repositório do colega; por padrão o pedido procura
 # por ele em http://host.docker.internal:8002 (estoque rodando na sua máquina).
-# Para usar o estoque publicado: ESTOQUE_SERVICE_URL=https://estoque-dev.onrender.com docker compose up
+# Para usar o estoque publicado: ESTOQUE_SERVICE_URL=https://estoque-dev-xraj.onrender.com docker compose up
 
 services:
   pedido-db:

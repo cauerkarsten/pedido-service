@@ -1,15 +1,15 @@
 # pedido-service
 
 Microsserviço de **pedidos** (FastAPI + PostgreSQL). Ao criar um pedido, ele reserva o produto no
-[estoque-service](https://github.com/COLEGA/estoque-service) (padrão Saga); ao cancelar um pedido
+estoque-service, do repositório do colega (padrão Saga); ao cancelar um pedido
 confirmado, ele pede o estorno ao estoque (ação compensatória).
 
 | Ambiente | Branch    | URL                                            | Estoque usado                      |
 |----------|-----------|------------------------------------------------|------------------------------------|
-| DEV      | `develop` | https://pedido-service-lzk8.onrender.com/docs  | https://estoque-dev.onrender.com   |
-| HOMOL    | `main`    | https://pedido-homol-c247.onrender.com/health  | https://estoque-homol.onrender.com |
+| DEV      | `develop` | https://pedido-service-lzk8.onrender.com/docs  | https://estoque-dev-xraj.onrender.com   |
+| HOMOL    | `main`    | https://pedido-homol-c247.onrender.com/health  | https://estoque-homol-e6on.onrender.com |
 
-> As URLs do estoque são do repositório do colega e serão atualizadas quando ele publicar.
+> O estoque-service fica no repositório do colega, com pipeline e deploy próprios.
 > No Render grátis os serviços "dormem" sem uso: a primeira requisição pode levar cerca de
 > 1 minuto. Abra as URLs antes de apresentar. Em HOMOL o Swagger fica desligado (`ENABLE_DOCS=false`).
 
@@ -46,7 +46,7 @@ docker compose up --build
 ```
 
 API em http://localhost:8003/docs. O estoque é procurado em `http://host.docker.internal:8002`;
-para usar o estoque publicado, rode com `ESTOQUE_SERVICE_URL=https://estoque-dev.onrender.com`.
+para usar o estoque publicado, rode com `ESTOQUE_SERVICE_URL=https://estoque-dev-xraj.onrender.com`.
 
 **Sem Docker** (Python 3.12):
 
