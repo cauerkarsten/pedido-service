@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Bibliotecas Python (requirements.txt e requirements-dev.txt)
+  - package-ecosystem: pip
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  # Actions usadas nos workflows
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+
+  # Imagem base do Dockerfile
+  - package-ecosystem: docker
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly

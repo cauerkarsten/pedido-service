@@ -1,0 +1,37 @@
+# Ambiente local: pedido-service + Postgres.
+# O estoque-service roda no repositório do colega; por padrão o pedido procura
+# por ele em http://host.docker.internal:8002 (estoque rodando na sua máquina).
+# Para usar o estoque publicado: ESTOQUE_SERVICE_URL=https://estoque-dev.onrender.com docker compose up
+
+services:
+  pedido-db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: admin_pedido
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: pedido_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pedido-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin_pedido -d pedido_db"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  pedido-service:
+    build: .
+    ports:
+      - "8003:8000"
+    environment:
+      DATABASE_URL: "postgresql://admin_pedido:123@pedido-db:5432/pedido_db"
+      ESTOQUE_SERVICE_URL: "${ESTOQUE_SERVICE_URL:-http://host.docker.internal:8002}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      pedido-db:
+        condition: service_healthy
+
+volumes:
+  pedido-db-data:
