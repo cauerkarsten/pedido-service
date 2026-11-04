@@ -3,28 +3,28 @@ global:
   # O Render grátis pode levar ~1 min para acordar um serviço
   scrape_timeout: 10s
 
-# Troque os targets pelos endereços reais do Render (sem https://)
+# Endereços dos serviços publicados no Render (sem https://)
 scrape_configs:
   - job_name: estoque-dev
     scheme: https
     metrics_path: /metrics
     static_configs:
-      - targets: ["estoque-dev.onrender.com"]
+      - targets: ["estoque-dev-xraj.onrender.com"]
 
   - job_name: estoque-homol
     scheme: https
     metrics_path: /metrics
     static_configs:
-      - targets: ["estoque-homol.onrender.com"]
+      - targets: ["estoque-homol-e6on.onrender.com"]
 
   - job_name: pedido-dev
     scheme: https
     metrics_path: /metrics
     static_configs:
-      - targets: ["pedido-dev.onrender.com"]
+      - targets: ["pedido-service-lzk8.onrender.com"]
 
   - job_name: pedido-homol
     scheme: https
     metrics_path: /metrics
     static_configs:
-      - targets: ["pedido-homol.onrender.com"]
+      - targets: ["pedido-homol-c247.onrender.com"]
