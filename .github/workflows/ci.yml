@@ -35,7 +35,7 @@ jobs:
       - name: Análise no SonarCloud
         # PRs do Dependabot e de forks não recebem o SONAR_TOKEN; nesses casos pula
         if: ${{ env.SONAR_TOKEN != '' }}
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v7
 
   docker:
     name: Build da imagem Docker
