@@ -139,10 +139,30 @@ docker compose up -d
   já vem carregado, com os gráficos de requisições por segundo, latência p95 e erros 5xx, e um
   filtro por serviço/ambiente no topo.
 
-Antes de subir, troque os targets pelos endereços reais em
+Os targets dos 4 serviços estão em
 [observabilidade/prometheus/prometheus.yml](observabilidade/prometheus/prometheus.yml).
-O estoque-service precisa expor `/metrics` com a mesma biblioteca
-(`prometheus-fastapi-instrumentator`) para os gráficos funcionarem com os dois.
+Os dois serviços expõem `/metrics` com a mesma biblioteca (`prometheus-fastapi-instrumentator`).
+
+**Sem Docker** (máquina sem virtualização): baixe os binários para Windows do
+[Prometheus](https://prometheus.io/download/) e do [Grafana](https://grafana.com/grafana/download?platform=windows)
+e use os mesmos arquivos desta pasta:
+
+```bash
+prometheus.exe --config.file=observabilidade/prometheus/prometheus.yml
+```
+
+No Grafana, aponte `[paths] provisioning` para uma cópia de `observabilidade/grafana/provisioning/`
+com a URL do datasource trocada para `http://localhost:9090` e o caminho dos dashboards para
+`observabilidade/grafana/dashboards`.
+
+**O que cada gráfico mede:**
+
+| Gráfico | Consulta (PromQL) |
+|---------|-------------------|
+| Serviço no ar | `up` (1 quando o Prometheus consegue ler o `/metrics`) |
+| Requisições por segundo | `sum by (job) (rate(http_requests_total[1m]))` |
+| Latência p95 | `histogram_quantile(0.95, sum by (job, le) (rate(http_request_duration_highr_seconds_bucket[5m])))` |
+| Erros 5xx por segundo | `sum by (job) (rate(http_requests_total{status="5xx"}[5m]))` |
 
 > Enquanto o Prometheus estiver rodando, ele consulta os serviços a cada 15 s e impede que eles
 > durmam, o que consome as 750 h/mês grátis do Render. Desligue com `docker compose down` depois.
