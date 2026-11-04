@@ -4,13 +4,14 @@ Microsserviço de **pedidos** (FastAPI + PostgreSQL). Ao criar um pedido, ele re
 [estoque-service](https://github.com/COLEGA/estoque-service) (padrão Saga); ao cancelar um pedido
 confirmado, ele pede o estorno ao estoque (ação compensatória).
 
-| Ambiente | Branch    | URL                                   | Estoque usado                         |
-|----------|-----------|---------------------------------------|---------------------------------------|
-| DEV      | `develop` | https://pedido-dev.onrender.com/docs  | https://estoque-dev.onrender.com      |
-| HOMOL    | `main`    | https://pedido-homol.onrender.com     | https://estoque-homol.onrender.com    |
+| Ambiente | Branch    | URL                                            | Estoque usado                      |
+|----------|-----------|------------------------------------------------|------------------------------------|
+| DEV      | `develop` | https://pedido-service-lzk8.onrender.com/docs  | https://estoque-dev.onrender.com   |
+| HOMOL    | `main`    | https://pedido-homol-c247.onrender.com/health  | https://estoque-homol.onrender.com |
 
-> Troque as URLs pelas reais. No Render grátis os serviços "dormem" sem uso: a primeira requisição
-> pode levar cerca de 1 minuto. Abra as URLs antes de apresentar.
+> As URLs do estoque são do repositório do colega e serão atualizadas quando ele publicar.
+> No Render grátis os serviços "dormem" sem uso: a primeira requisição pode levar cerca de
+> 1 minuto. Abra as URLs antes de apresentar. Em HOMOL o Swagger fica desligado (`ENABLE_DOCS=false`).
 
 ## Endpoints
 
